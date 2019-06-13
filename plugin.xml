@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin id="cordova-blur-app-privacy-screen" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
   <name>BlurAppPrivacyScreen</name>
+  <platform name="android">
+    <config-file parent="/*" target="res/xml/config.xml">
+        <feature name="PrivacyScreenBlur">
+            <param name="android-package" value="cordova.plugin.privacy.screen.blur.PrivacyScreenBlur" />
+            <param name="onload" value="true" />
+        </feature>
+    </config-file>
+    <config-file parent="/*" target="AndroidManifest.xml" />
+    <source-file src="src/android/PrivacyScreenBlur.java" target-dir="src/cordova/plugin/privacy/screen/blur" />
+  </platform>
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
       <feature name="BlurAppPrivacyScreen">
