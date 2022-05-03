@@ -26,12 +26,14 @@ public class PrivacyScreenBlur extends CordovaPlugin {
         return false;
     }
 
-    private void updateSecureFlag(Boolean isEnableFlag) {
+    private void updateSecureFlag(Boolean isEnableFlag, CallbackContext callbackContext) {
         Window window = this.cordova.getActivity().getWindow();
         if (isEnableFlag) {
             window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
+            callbackContext.success('enable FLAG_SECURE');
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            callbackContext.success('disable FLAG_SECURE');
         }
     }
 }
