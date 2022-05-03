@@ -18,33 +18,20 @@ public class PrivacyScreenBlur extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
+        if (action.equals("updateSecureFlag")) {
+            Boolean isEnableFlag = args.getBoolean(0);
+            this.updateSecureFlag(isEnableFlag);
             return true;
         }
         return false;
     }
 
-    private void coolMethod(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
+    private void updateSecureFlag(Boolean isEnableFlag) {
+        Window window = this.cordova.getActivity().getWindow();
+        if (isEnableFlag) {
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
         } else {
-            callbackContext.error("Expected one non-empty string argument.");
+            window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
-    }
-
-    @Override
-    public void onPause(boolean multitasking) {
-      Window window = this.cordova.getActivity().getWindow();
-      window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
-      super.onPause(multitasking);
-    }
-  
-    @Override
-    public void onResume(boolean multitasking) {
-      Window window = this.cordova.getActivity().getWindow();
-      window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
-      super.onResume(multitasking);
     }
 }
