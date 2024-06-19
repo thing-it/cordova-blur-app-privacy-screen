@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="cordova-blur-app-privacy-screen" version="0.0.5" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-blur-app-privacy-screen" version="1.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>BlurAppPrivacyScreen</name>
     <js-module src="www/blur-app-privacy-screen.js" name="BlurAppPrivacyScreen">
         <clobbers target="BlurAppPrivacyScreen" />

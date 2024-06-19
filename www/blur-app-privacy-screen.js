@@ -2,7 +2,7 @@
 
 var BlurAppPrivacyScreen = {
     updateSecureFlag: function (isEnableFlag, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "BlurAppPrivacyScreen", "updateSecureFlag", [isEnableFlag]);
+        cordova.exec(successCallback, errorCallback, "PrivacyScreenBlur", "updateSecureFlag", [isEnableFlag]);
     }
 }
 
