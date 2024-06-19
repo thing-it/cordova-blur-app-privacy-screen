@@ -16,24 +16,29 @@ import org.json.JSONObject;
  */
 public class PrivacyScreenBlur extends CordovaPlugin {
 
-    @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("updateSecureFlag")) {
-            Boolean isEnableFlag = args.getBoolean(0);
-            this.updateSecureFlag(isEnableFlag);
-            return true;
-        }
-        return false;
+  @Override
+  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    if (action.equals("updateSecureFlag")) {
+      if (args.get(0).toString() == "true") {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            cordova.getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                    WindowManager.LayoutParams.FLAG_SECURE);
+          }
+        });
+      } else {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            cordova.getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+          }
+        });
+      }
+
+      return true;
     }
 
-    private void updateSecureFlag(Boolean isEnableFlag, CallbackContext callbackContext) {
-        Window window = this.cordova.getActivity().getWindow();
-        if (isEnableFlag) {
-            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
-            callbackContext.success("enable FLAG_SECURE");
-        } else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
-            callbackContext.success("disable FLAG_SECURE");
-        }
-    }
+    return false;
+  }
 }
